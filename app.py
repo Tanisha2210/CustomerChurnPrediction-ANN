@@ -1,4 +1,4 @@
-# Force rebuild
+# Force rebuild and redeploy
 import streamlit as st
 import numpy as np
 import tensorflow as tf
