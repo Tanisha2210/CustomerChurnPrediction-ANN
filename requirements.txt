@@ -4,6 +4,4 @@ pandas
 scikit-learn
 tensorboard
 matplotlib
-ipykernel
-notebook
-tensorflow==2.15.0
+tensorflow
