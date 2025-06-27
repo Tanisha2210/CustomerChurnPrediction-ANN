@@ -7,7 +7,24 @@ import pandas as pd
 import pickle
 
 #Load the trained model
-model=tf.keras.models.load_model('model.h5')
+@st.cache_resource
+def load_model():
+    try:
+        # Load model without compiling to avoid version conflicts
+        model = tf.keras.models.load_model('model.h5', compile=False)
+        # Recompile the model with current Keras version syntax
+        model.compile(
+            optimizer='adam',
+            loss='binary_crossentropy',
+            metrics=['accuracy']
+        )
+        st.success("Model loaded successfully!")
+        return model
+    except Exception as e:
+        st.error(f"Error loading model: {str(e)}")
+        return None
+
+model = load_model()
 
 #Load the encoders and scaler
 with open('label_encoder_gender.pkl','rb') as file:
